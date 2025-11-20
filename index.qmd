@@ -1,11 +1,16 @@
 ---
-title: "Noahmj123.github.io"
+title: "Noah Jansen"
+image: media/frontpic.JPG
+toc: false
+about:
+  template: trestles
+  image-shape: rectangle
+  links: 
+    - text: Github
+      href: https://github.com/Noahmj123
+    - text: email
+      href: mailto:noahjansen622@gmail.com
 ---
 
-This is a Quarto website.
+Hello! I am Noah Jansen and this is my Website! I am a Junior Mathematics Major, with a concentration in Statistics and Data Science, at St. Olaf College in Northfield, Minnesota.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
