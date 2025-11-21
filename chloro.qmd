@@ -1,6 +1,210 @@
 ---
-title: "About"
+title: "Choropleth Data of US Licensed Drivers"
+toc: true
+execute:
+  echo: false
+  warning: false
 ---
 
-About this site
+```{r}
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(stringr)
+library(maps)
+library(viridis)
+library(ggthemes)
+library(rvest)
+library(dplyr)
+library(tinytex)
+library(mdsr) 
+library(readr)
+library(janitor)
+library(ggplot2)
+library(htmltools)
+library(glue)
+library(leaflet)
+library(sf)
+
+knitr::opts_chunk$set(dev.args = list(bg = "transparent")) #lets plots blend in with website background
+```
+
+```{r}
+license <- read.csv("/Users/noahmj123/Noahmj123.github.io/chloro/license.csv")
+
+license15 <- license |>
+  filter(Year == 2015) |>
+  mutate(State = str_to_lower(State)) #to make join with states easier
+```
+To shows some cool examples of how we can use choropleth maps to visualize statewide data in R, lets take a look at male driving data from 2015! All data was collected from <a href="https://www.kaggle.com/datasets/ibrahimonmars/licensed-drivers-by-state-gender-and-age-group" target="_blank" rel="noopener">Kaggle</a>.
+
+## 16 Year Old Drivers
+
+With 16 being the age where American Citizens are legal to get their drivers license, lets see how many of them in each state are actually taking this opportunity.
+
+```{r}
+us_states <- map_data("state") #basic mapping for plotting us states in geom_polygon
+
+license15 |>
+  right_join(us_states, by = c("State" = "region")) |>
+  rename(region = State) |>
+  filter(Cohort == "16", Gender == "Male") |>
+  ggplot(mapping = aes(x = long, y = lat,
+                          group = group)) + 
+  geom_polygon(aes(fill = Drivers), color = "black") +
+  coord_map() +
+  labs(title = "Number of 16 Year Old Male Drivers in Each State During 2015", x = "", y = "", caption = "https://www.kaggle.com/datasets/ibrahimonmars/licensed-drivers-by-state-gender-and-age-group", fill = "# of Drivers") +
+  theme_void() + #gets rid of axis and lines
+  scale_fill_viridis(option = "F")  + #color scale
+  theme(plot.background = element_rect(fill = "transparent", color = "transparent")) #helps plot blend into background
+```
+
+
+
+In this plot it's easy to see how states like Michigan and Texas have the most and New Mexico and Kentucky are close to the fewest, but regardless of the color gradient it's hard to tell numerically how much each state has. So, lets make this a little more interactive!
+
+
+
+```{r}
+states <- read_sf("https://rstudio.github.io/leaflet/json/us-states.geojson") #geometry of states for leaflet
+
+states <- states |>
+  rename(State = name) |>
+  mutate(State = str_to_lower(State)) |> #for joining
+  select(State, geometry)
+
+license15num <- license15 |>
+  filter(Cohort == "16", Gender == "Male") |>
+  right_join(states, by = "State") |>
+  mutate(State = str_to_title(State)) |> #Capitalize for interactive descriptions
+  filter(State != "Puerto Rico")
+  
+license15num <- st_as_sf(license15num) #have to make geometry back into an sf column so readable in leaflet
+```
+
+```{r}
+bins <- c(0, 1000, 5000, 10000, 15000, 20000, 30000, 40000, Inf)
+
+pal <- colorBin("YlOrRd", domain = license15num$Drivers, bins = bins) #joins color and bins
+
+license15num <- license15num |>
+  mutate(labels = str_c(State, ": ", Drivers, " Male 16 Year Old Drivers in 2015")) #descriptions for interactive
+
+labels <- lapply(license15num$labels, HTML)
+
+leaflet(license15num) |> 
+  setView(-96, 37.8, 4) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~pal(Drivers),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto")) |>
+  addLegend(pal = pal, values = ~Drivers, opacity = 0.7, title = NULL,
+    position = "bottomright")
+```
+
+
+
+Wow, now we know Michigan had a whopping 39,750 16 year old male drivers in 2015 and New Mexico had a measily 132 16 year old male drivers. It's pretty interesting to see the 4th most populous state, New York, had only 5400 16 year old drivers compared to the 3rd most populous state, Florida, with 21,936. This is something that could really elevate a good research question, but is most likely due to around half of the population in New York being in New York City, so not many people bother to get a license with the subway system.
+
+
+## Age Cohorts
+
+Another interesting piece to look at would be what is the age cohort with the largest amount of drivers in each state? Lets see how well this looks in a static plot first:
+
+
+```{r}
+license15 |>
+  right_join(us_states, by = c("State" = "region")) |>
+  rename(region = State) |>
+  filter(Gender == "Male") |>
+  group_by(region) |> 
+  slice_max(Drivers, n = 1) |> #grabs highest driver group by state
+  ggplot(mapping = aes(x = long, y = lat,
+                          group = group)) + 
+  geom_polygon(aes(fill = Cohort), color = "black") +
+  coord_map() +
+  labs(title = "Age Cohort with Most Male Drivers Per State", x = "", y = "", caption = "https://www.kaggle.com/datasets/ibrahimonmars/licensed-drivers-by-state-gender-and-age-group", fill = "Age Cohort") +
+  theme_void() +
+  theme(panel.background = element_rect(fill = "#f0f0f0", color = "#f0f0f0"), plot.background = element_rect(fill = "#f0f0f0", color = "#f0f0f0")) #plot to blend with webpage
+```
+
+
+Not bad not bad. It's crazy to see a state like West Virginia where the largest cohort is 60-64 year old drivers. Western States also have a higher prevalence of drivers in the 25-29 and 30-34 group while the Eastern states have a higher prevalence of drivers in the 50-45 and 55-59 groups. It is annoying having to look at the key everytime I want to check a states largest cohort so lets make this interactive!
+
+
+```{r}
+license15cat <- license15 |>
+  filter(Gender == "Male") |>
+  group_by(State) |>
+  slice_max(Drivers, n = 1) |>
+  right_join(states, by = "State")
+```
+
+```{r}
+
+license15cat <- license15cat |>
+  mutate(State = str_to_title(State)) |>
+  filter(State != "Puerto Rico") |>
+  mutate(labels = str_c(State, ": ", Cohort, " year olds have the most male drivers"))
+
+labels <- lapply(license15cat$labels, HTML)
+pal <- colorFactor(palette = "YlOrRd", domain = license15cat$Cohort)
+
+
+
+leaflet(st_as_sf(license15cat)) |> #st as sf for making geometry leaflet readable
+  setView(-96, 37.8, 4) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~pal(Cohort),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlightOptions = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto")) |>
+  addLegend(pal = pal, values = ~Cohort, opacity = 0.7, title = NULL,
+    position = "bottomright")
+```
+
+
+That is much better for viewing our data. Now we are even able to zoom in to see that the District of Columbia has their cohort as 30-34 year old men and we don't have to squint at Rhode Island. It's also interesting how North and South Dakota have very young age for drivers while most of their bordering states are 55-59.
+
+Regardless, both static and interactive plots can be respectively more useful depending on what type of data you are wanting to use. When dealing with geographic data sets, interactive may be the better option and can keep a reader of your research more engaged and help them better understand what is truly being recorded. Interactive maps are a useful skill for our ever-growing toolkit of data visualizations and will be quite useful for my future projects.
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,8 +1,9 @@
 ---
 title: "Noah Jansen"
 image: media/frontpic.JPG
-toc: false
+toc: true
 about:
+  id: intro-heading
   template: trestles
   image-shape: rectangle
   links: 
@@ -13,7 +14,7 @@ about:
 ---
 :::{#intro-heading}
 
-## About
+## Introduction
 
 Hello! I am Noah Jansen and I am a Junior Mathematics Major with a concentration in Statistics and Data Science at St. Olaf College in Northfield, Minnesota. 
 
@@ -35,3 +36,13 @@ President/Founding Member Billiards Club<br>
 BA in Mathematics<br>
 2023-present | St. Olaf College
 :::
+
+
+### Personal
+
+Despite being at school in Minnesota and currently a resident of Colorado, I am originally from Northern California, which explains being a Kings fan. I am a hobby hopper with notable entries including but not limited to Golf, Pickleball, Basketball, Triathletics, Video Game Collecting/Speedrunning, and currently Magic the Gathering!
+
+As a student at St. Olaf, I enjoy getting my hands on any projects or research relating to RStudio, Statistics, or Data Analytics. While I enjoy doing personal projects involving data related to the NBA, I'm also lucky enough to be doing research with Northfield Public Schools through the Center of Interdisciplinary Research at St. Olaf. 
+
+### Letterboxd Top 4
+![](media/letter4.png)

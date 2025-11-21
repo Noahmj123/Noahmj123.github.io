@@ -1,6 +1,6 @@
 ---
 title: "Mini Project 1: Steam User Analysis of Papers, Please!"
-toc: false
+toc: true
 execute:
   echo: false
   warning: false

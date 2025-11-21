@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Noah Jansen",
     "section": "",
-    "text": "Hello! I am Noah Jansen and I am a Junior Mathematics Major with a concentration in Statistics and Data Science at St. Olaf College in Northfield, Minnesota.\nWhile I am busy being nose deep in RStudio for most of my day, I am also a huge Sacramento Kings fan (Light the Beam!) and am the president of the Billiards Club here at St. Olaf.\n\n\nCenter of Interdisciplinary Research Fellow 2025-present | St. Olaf College\nOperational Excellence Intern May-August 2025 | Longville Area Food Shelf\nPresident/Founding Member Billiards Club 2024-present | St. Olaf College\n\n\n\nBA in Mathematics 2023-present | St. Olaf College"
+    "text": "Github\n  \n  \n     email\n  \n\n  \n  \n\n\nHello! I am Noah Jansen and I am a Junior Mathematics Major with a concentration in Statistics and Data Science at St. Olaf College in Northfield, Minnesota.\nWhile I am busy being nose deep in RStudio for most of my day, I am also a huge Sacramento Kings fan (Light the Beam!) and am the president of the Billiards Club here at St. Olaf.\n\n\nCenter of Interdisciplinary Research Fellow 2025-present | St. Olaf College\nOperational Excellence Intern May-August 2025 | Longville Area Food Shelf\nPresident/Founding Member Billiards Club 2024-present | St. Olaf College\n\n\n\nBA in Mathematics 2023-present | St. Olaf College"
   },
   {
     "objectID": "index.html#noah-jansen",
@@ -110,5 +110,40 @@
     "title": "Mini Project 1: Steam User Analysis of Papers, Please!",
     "section": "Conclusion",
     "text": "Conclusion\nWith such a high computed score from player’s personal reviews, positive word choice to express enjoyment and engagement with the game, and vulgarity used in positive context, “Papers, Please!” has a wide variety of reviews that express the intense emotions players experience and enjoy through their playthroughs. Digging into the textual reviews gave us a good glimpse into the actual words of players compared to a simple recommend or not recommend. With an overwhelming amount of players rating the game a 10 or higher, and a lot of the negative words used to describe the game are mostly complements, “Papers, Please!” is well deserving of the high marks and awards it has recieved throughout the years. More often than not, “Highly Recommend” is an understatement of a player’s true feelings for the game."
+  },
+  {
+    "objectID": "chloro.html",
+    "href": "chloro.html",
+    "title": "Choropleth Data of US Licensed Drivers",
+    "section": "",
+    "text": "To shows some cool examples of how we can use choropleth maps to visualize statewide data in R, lets take a look at male driving data from 2015! All data was collected from Kaggle."
+  },
+  {
+    "objectID": "chloro.html#year-old-drivers",
+    "href": "chloro.html#year-old-drivers",
+    "title": "Choropleth Data of US Licensed Drivers",
+    "section": "16 Year Old Drivers",
+    "text": "16 Year Old Drivers\nWith 16 being the age where American Citizens are legal to get their drivers license, lets see how many of them in each state are actually taking this opportunity.\n\n\n\n\n\n\n\n\n\nIn this plot it’s easy to see how states like Michigan and Texas have the most and New Mexico and Kentucky are close to the fewest, but regardless of the color gradient it’s hard to tell numerically how much each state has. So, lets make this a little more interactive!\n\n\n\n\n\n\nWow, now we know Michigan had a whopping 39,750 16 year old male drivers in 2015 and New Mexico had a measily 132 16 year old male drivers. It’s pretty interesting to see the 4th most populous state, New York, had only 5400 16 year old drivers compared to the 3rd most populous state, Florida, with 21,936. This is something that could really elevate a good research question, but is most likely due to around half of the population in New York being in New York City, so not many people bother to get a license with the subway system."
+  },
+  {
+    "objectID": "chloro.html#age-cohorts",
+    "href": "chloro.html#age-cohorts",
+    "title": "Choropleth Data of US Licensed Drivers",
+    "section": "Age Cohorts",
+    "text": "Age Cohorts\nAnother interesting piece to look at would be what is the age cohort with the largest amount of drivers in each state? Lets see how well this looks in a static plot first:\n\n\n\n\n\n\n\n\n\nNot bad not bad. It’s crazy to see a state like West Virginia where the largest cohort is 60-64 year old drivers. Western States also have a higher prevalence of drivers in the 25-29 and 30-34 group while the Eastern states have a higher prevalence of drivers in the 50-45 and 55-59 groups. It is annoying having to look at the key everytime I want to check a states largest cohort so lets make this interactive!\n\n\n\n\n\n\nThat is much better for viewing our data. Now we are even able to zoom in to see that the District of Columbia has their cohort as 30-34 year old men and we don’t have to squint at Rhode Island. It’s also interesting how North and South Dakota have very young age for drivers while most of their bordering states are 55-59.\nRegardless, both static and interactive plots can be respectively more useful depending on what type of data you are wanting to use. When dealing with geographic data sets, interactive may be the better option and can keep a reader of your research more engaged and help them better understand what is truly being recorded. Interactive maps are a useful skill for our ever-growing toolkit of data visualizations and will be quite useful for my future projects."
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Noah Jansen",
+    "section": "",
+    "text": "Hello! I am Noah Jansen and I am a Junior Mathematics Major with a concentration in Statistics and Data Science at St. Olaf College in Northfield, Minnesota.\nWhile I am busy being nose deep in RStudio for most of my day, I am also a huge Sacramento Kings fan (Light the Beam!) and am the president of the Billiards Club here at St. Olaf.\n\n\nCenter of Interdisciplinary Research Fellow 2025-present | St. Olaf College\nOperational Excellence Intern May-August 2025 | Longville Area Food Shelf\nPresident/Founding Member Billiards Club 2024-present | St. Olaf College\n\n\n\nBA in Mathematics 2023-present | St. Olaf College"
+  },
+  {
+    "objectID": "index.html#personal",
+    "href": "index.html#personal",
+    "title": "Noah Jansen",
+    "section": "Personal",
+    "text": "Personal\nDespite being at school in Minnesota and currently a resident of Colorado, I am originally from Northern California, which explains being a Kings fan. I am a hobby hopper with notable entries including but not limited to Golf, Pickleball, Basketball, Triathletics, Video Game Collecting/Speedrunning, and currently Magic the Gathering!\nAs a student at St. Olaf, I enjoy getting my hands on any projects or research relating to RStudio, Statistics, or Data Analytics. While I enjoy doing personal projects involving data related to the NBA, I’m also lucky enough to be doing research with Northfield Public Schools through the Center of Interdisciplinary Research at St. Olaf."
   }
 ]
