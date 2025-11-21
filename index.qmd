@@ -11,6 +11,27 @@ about:
     - text: email
       href: mailto:noahjansen622@gmail.com
 ---
+:::{#intro-heading}
 
-Hello! I am Noah Jansen and this is my Website! I am a Junior Mathematics Major, with a concentration in Statistics and Data Science, at St. Olaf College in Northfield, Minnesota.
+## About
 
+Hello! I am Noah Jansen and I am a Junior Mathematics Major with a concentration in Statistics and Data Science at St. Olaf College in Northfield, Minnesota. 
+
+While I am busy being nose deep in RStudio for most of my day, I am also a huge Sacramento Kings fan (Light the Beam!) and am the president of the Billiards Club here at St. Olaf.
+
+### Experiences
+
+Center of Interdisciplinary Research Fellow<br>
+2025-present |  St. Olaf College
+
+Operational Excellence Intern<br>
+May-August 2025 |  Longville Area Food Shelf
+
+President/Founding Member Billiards Club<br>
+2024-present |  St. Olaf College
+
+### Education
+
+BA in Mathematics<br>
+2023-present | St. Olaf College
+:::

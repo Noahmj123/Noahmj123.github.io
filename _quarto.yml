@@ -3,12 +3,21 @@ project:
   output-dir: docs
 
 website:
-  title: "Noahmj123.github.io"
+  title: "Noah Jansen"
   navbar:
+    foreground: "#004225"
+    highlight: "#56AE57"
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - text: Projects
+        menu: 
+          - href: minip1.qmd
+            text: Papers, Please!
+          
+            
+          
+
 
 format:
   html:
